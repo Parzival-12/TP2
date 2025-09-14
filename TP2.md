@@ -42,9 +42,12 @@ Plan: 3 to add, 0 to change, 0 to destroy.
 ```
 une commande az pour obtenir toutes les infos liées à la VM
 Commande: 
-```az network nic show --resource-group aaa --name vm-nic --query 'networkSecurityGroup.id'
+
 ```
-Resultat ```
+az network nic show --resource-group aaa --name vm-nic --query 'networkSecurityGroup.id'
+```
+Resultat 
+```
 "/subscriptions/e01b5125-7655-4382-8b6f-4c805b30f92e/resourceGroups/aaa/providers/Microsoft.Network/networkSecurityGroups/ssh-nsg"
 
 ``` 
@@ -114,4 +117,5 @@ Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 Outputs:
 
 public_ip_address = "172.167.153.200"
+
 ```
