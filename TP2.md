@@ -208,3 +208,7 @@ PS C:\Program Files\Terraform> ssh -p 2222 aaa@20.162.250.29
 ssh: connect to host 20.162.250.29 port 2222: Connection timed out
 PS C:\Program Files\Terraform>
 ```
+une commande ssh fonctionnelle vers le nom de domaine (pas l'IP)
+vers le nom de domaine de la publique
+toujours sans mot de passe avec votre Agent SSH
+``` ```
