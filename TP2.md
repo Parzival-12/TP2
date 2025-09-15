@@ -56,7 +56,7 @@ une commande ssh fonctionnelle
 vers l'IP publique de la VM
 toujours sans mot de passe avec votre Agent SSH
 ``` 
-PS C:\Program Files\Terraform> ssh aaa@172.167.153.200
+PS C:\Program Files\Terraform> ssh aaa@20.162.250.29 -i "C:\Users\chims\.ssh\Cloud_tp1"
 ```
 
 🌞 Donner un nom DNS à votre VM
@@ -116,6 +116,95 @@ Apply complete! Resources: 0 added, 1 changed, 0 destroyed.
 
 Outputs:
 
-public_ip_address = "172.167.153.200"
+public_ip_address = "20.162.250.29"
 
+```
+une commande ssh fonctionnelle
+
+vers l'IP publique de la VM
+toujours sans mot de passe avec votre Agent SSH
+
+```
+PS C:\Program Files\Terraform> ssh aaa@20.162.250.29 -i "C:\Users\chims\.ssh\Cloud_tp1"
+Welcome to Ubuntu 20.04.6 LTS (GNU/Linux 5.15.0-1089-azure x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Sep 15 11:01:21 UTC 2025
+
+  System load:  0.0               Processes:             110
+  Usage of /:   5.5% of 28.89GB   Users logged in:       0
+  Memory usage: 30%               IPv4 address for eth0: 10.0.1.4
+  Swap usage:   0%
+
+ * Strictly confined Kubernetes makes edge and IoT secure. Learn how MicroK8s
+   just raised the bar for easy, resilient and secure K8s cluster deployment.
+
+   https://ubuntu.com/engage/secure-kubernetes-at-the-edge
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+New release '22.04.5 LTS' available.
+Run 'do-release-upgrade' to upgrade to it.
+
+
+Last login: Mon Sep 15 10:57:06 2025 from 37.169.117.114
+aaa@aaa:~$
+```
+changement de port :
+modifiez le port d'écoute du serveur OpenSSH sur la VM pour le port 2222/tcp
+prouvez que le serveur OpenSSH écoute sur ce nouveau port (avec une commande ss sur la VM)
+prouvez qu'une nouvelle connexion sur ce port 2222/tcp ne fonctionne pas à cause du NSG
+
+``` 
+sudo nano /etc/ssh/sshd_config
+#       $OpenBSD: sshd_config,v 1.103 2018/04/09 20:41:22 tj Exp $
+
+# This is the sshd server system-wide configuration file.  See
+# sshd_config(5) for more information.
+
+# This sshd was compiled with PATH=/usr/bin:/bin:/usr/sbin:/sbin
+
+# The strategy used for options in the default sshd_config shipped with
+# OpenSSH is to specify options with their default value where
+# possible, but leave them commented.  Uncommented options override the
+# default value.
+
+Include /etc/ssh/sshd_config.d/*.conf
+
+Port 2222 #
+#AddressFamily any
+#ListenAddress 0.0.0.0
+#ListenAddress ::
+
+#HostKey /etc/ssh/ssh_host_rsa_key
+#HostKey /etc/ssh/ssh_host_ecdsa_key
+#HostKey /etc/ssh/ssh_host_ed25519_key
+```
+
+``` 
+aaa@aaa:~$ sudo systemctl restart sshd
+```
+
+```
+aaa@aaa:~$ sudo ss -tlnp | grep 2222
+LISTEN    0         128                0.0.0.0:2222             0.0.0.0:*        users:(("sshd",pid=2540,fd=3))                                   
+LISTEN    0         128                   [::]:2222                [::]:*        users:(("sshd",pid=2540,fd=4))                                   
+aaa@aaa:~$
+```
+prouvez qu'une nouvelle connexion sur ce port 2222/tcp ne fonctionne pas à cause du NSG
+```
+PS C:\Program Files\Terraform> ssh -p 2222 aaa@20.162.250.29
+ssh: connect to host 20.162.250.29 port 2222: Connection timed out
+PS C:\Program Files\Terraform>
 ```
