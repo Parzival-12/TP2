@@ -211,4 +211,11 @@ PS C:\Program Files\Terraform>
 une commande ssh fonctionnelle vers le nom de domaine (pas l'IP)
 vers le nom de domaine de la publique
 toujours sans mot de passe avec votre Agent SSH
-``` ```
+``` 
+Outputs:
+
+public_ip_address = "20.162.250.29"
+vm_dns_name = "serveurtp2.uksouth.cloudapp.azure.com"
+
+```
+
