@@ -45,7 +45,7 @@ resource "azurerm_public_ip" "main" {
   sku                 = "Standard"
 
 # This is the correct location for the dns_name_label argument
-  domain_name_label      = "serveur-ssh-tp2"
+  domain_name_label      = "serveurtp2"
 }
 
 resource "azurerm_linux_virtual_machine" "main" {
@@ -76,4 +76,5 @@ resource "azurerm_linux_virtual_machine" "main" {
     version   = "latest"
   } 
 }
+
 
