@@ -265,3 +265,20 @@ III. Blob storage
 
 ``` 
 ```
+
+2. Une alerte CPU¶
+🌞
+```
+You’ve been added to an Azure Monitor action group
+You are now in the vm-alerts action group and will receive notifications sent to the group.
+
+View details on Azure Monitor action groups >
+
+Account information
+Subscription ID: E01B5125-7655-4382-8B6F-4C805B30F92E
+
+Resource group name: aaa
+
+Action group name: ag-aaa-alerts
+```
+
